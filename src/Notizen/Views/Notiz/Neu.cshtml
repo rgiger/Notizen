@@ -1,0 +1,78 @@
+@model Notizen.Model.NotizModel
+
+@{
+    ViewData["Title"] = "Neu";
+}
+
+<h2>Neu</h2>
+
+<form asp-action="Neu">
+    <div class="form-horizontal">
+        <h4>NotizModel</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Id" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Beschreibung" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Beschreibung" class="form-control" />
+                <span asp-validation-for="Beschreibung" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wichtigkeit" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wichtigkeit" class="form-control" />
+                <span asp-validation-for="Wichtigkeit" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="Abgeschlossen" />
+                    <label asp-for="Abgeschlossen"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Erstelldatum" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Erstelldatum" class="form-control" />
+                <span asp-validation-for="Erstelldatum" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ErledigtBis" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ErledigtBis" class="form-control" />
+                <span asp-validation-for="ErledigtBis" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+@*
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

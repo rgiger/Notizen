@@ -45,7 +45,7 @@ namespace Notizen
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Notiz/Error");
             }
 
             app.UseStaticFiles();
@@ -54,7 +54,7 @@ namespace Notizen
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Notiz}/{action=Liste}/{id?}");
             });
         }
     }
