@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Notizen.DbModel;
+using Notizen.Notizen;
 
 namespace Notizen
 {
@@ -29,6 +32,7 @@ namespace Notizen
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
         }
 
@@ -37,7 +41,8 @@ namespace Notizen
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            var context = app.ApplicationServices.GetService<Context>();
+            AddTestData(context);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -56,6 +61,31 @@ namespace Notizen
                     name: "default",
                     template: "{controller=Notiz}/{action=Liste}/{id?}");
             });
+        }
+
+        private void AddTestData(Context context)
+        {
+            var notiz1 = new Notiz
+            {
+                Erstelldatum = DateTime.Today,
+                Beschreibung = "Mit diesem Programm kann man Notizen schreiben.",
+                Wichtigkeit = 1,
+                Title = "Erste Notiz",
+                Abgeschlossen = false,
+                ErledigtBis = DateTime.Today.AddDays(1)
+            };
+            var notiz2 = new Notiz
+            {
+                Erstelldatum = DateTime.Today,
+                Beschreibung = "Am besten sollte man sich alles notieren.",
+                Wichtigkeit = 1,
+                Title = "Nicht vergessen",
+                Abgeschlossen = false,
+                ErledigtBis = DateTime.Today.AddDays(3)
+            };
+            context.Add(notiz1);
+            context.Add(notiz2);
+            context.SaveChanges();
         }
     }
 }
