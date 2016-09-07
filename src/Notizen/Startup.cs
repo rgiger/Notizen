@@ -65,7 +65,7 @@ namespace Notizen
 
         private void AddTestData(Context context)
         {
-            var notiz1 = new Notiz
+            var notiz1 = new NotizDbModel
             {
                 Erstelldatum = DateTime.Today,
                 Beschreibung = "Mit diesem Programm kann man Notizen schreiben.",
@@ -74,7 +74,7 @@ namespace Notizen
                 Abgeschlossen = false,
                 ErledigtBis = DateTime.Today.AddDays(1)
             };
-            var notiz2 = new Notiz
+            var notiz2 = new NotizDbModel
             {
                 Erstelldatum = DateTime.Today,
                 Beschreibung = "Am besten sollte man sich alles notieren.",

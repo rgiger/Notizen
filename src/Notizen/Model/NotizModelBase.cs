@@ -7,10 +7,14 @@ using Notizen.DbModel;
 
 namespace Notizen.Model
 {
-    public class NotizModel
+    public abstract class NotizModelBase
     {
 
-        public NotizModel(Notiz u)
+        public NotizModelBase()
+        {
+        }
+
+        public NotizModelBase(NotizDbModel u)
         {
             ErledigtBis = u.ErledigtBis;
             Abgeschlossen = u.Abgeschlossen;
@@ -32,5 +36,6 @@ namespace Notizen.Model
         public DateTime Erstelldatum { get; set; }
         [DataType(DataType.Date)]
         public DateTime ErledigtBis { get; set; }
+
     }
 }

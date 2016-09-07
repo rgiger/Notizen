@@ -17,7 +17,7 @@ namespace Notizen
             {
             }
 
-            public DbSet<Notiz> Notizen { get; set; }
+            public DbSet<NotizDbModel> Notizen { get; set; }
             
         }
     }

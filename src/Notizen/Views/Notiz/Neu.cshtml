@@ -1,4 +1,4 @@
-@model Notizen.Model.NotizModel
+@model Notizen.Model.NotizModelCreate
 
 @{
     ViewData["Title"] = "Neu";
@@ -10,14 +10,7 @@
     <div class="form-horizontal">
         <h4>NotizModel</h4>
         <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Id" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger" />
-            </div>
-        </div>
+       
         <div class="form-group">
             <label asp-for="Title" class="col-md-2 control-label"></label>
             <div class="col-md-10">
