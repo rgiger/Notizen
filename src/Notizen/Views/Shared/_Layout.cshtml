@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,8 +7,8 @@
     <title>@ViewData["Title"] - Notizen</title>
 
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" id="BootstrapStyle" href="@ViewBag.StyleBootstrap">
+        <link rel="stylesheet" href="~/css/site.css"/>
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -32,7 +33,9 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Notiz" asp-action="Liste">Liste</a></li>
                     <li><a asp-area="" asp-controller="Notiz" asp-action="Neu">Neue Notiz</a></li>
-                </ul>
+                    <li><a asp-area="" asp-controller="Notiz" asp-action="WechsleStyle">wechsle Style</a></li>
+ 
+                 </ul>
             </div>
         </div>
     </div>

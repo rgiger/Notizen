@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Notizen.DbModel;
-using Notizen.Notizen;
+using Notizen.DbModel.Notizen;
 
 namespace Notizen
 {
@@ -34,6 +34,8 @@ namespace Notizen
             // Add framework services.
             services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +56,7 @@ namespace Notizen
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -70,7 +72,7 @@ namespace Notizen
                 Erstelldatum = DateTime.Today,
                 Beschreibung = "Mit diesem Programm kann man Notizen schreiben.",
                 Wichtigkeit = 1,
-                Title = "Erste Notiz",
+                Titel = "Erste Notiz",
                 Abgeschlossen = false,
                 ErledigtBis = DateTime.Today.AddDays(1)
             };
@@ -79,7 +81,7 @@ namespace Notizen
                 Erstelldatum = DateTime.Today,
                 Beschreibung = "Am besten sollte man sich alles notieren.",
                 Wichtigkeit = 1,
-                Title = "Nicht vergessen",
+                Titel = "Nicht vergessen",
                 Abgeschlossen = false,
                 ErledigtBis = DateTime.Today.AddDays(3)
             };

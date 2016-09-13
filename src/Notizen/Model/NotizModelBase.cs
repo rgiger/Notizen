@@ -12,6 +12,7 @@ namespace Notizen.Model
 
         public NotizModelBase()
         {
+            
         }
 
         public NotizModelBase(NotizDbModel u)
@@ -21,13 +22,13 @@ namespace Notizen.Model
             Beschreibung = u.Beschreibung;
             Erstelldatum = u.Erstelldatum;
             Id = u.Id;
-            Title = u.Title;
+            Titel = u.Titel;
             Wichtigkeit = u.Wichtigkeit;
         }
 
         public int Id { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string Titel { get; set; }
         public string Beschreibung { get; set; }
         [Range(1, 5)]
         public short Wichtigkeit { get; set; }

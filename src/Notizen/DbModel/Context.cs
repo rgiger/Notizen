@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Notizen.DbModel;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Notizen
+namespace Notizen.DbModel
 {
-    using Microsoft.EntityFrameworkCore;
-
     namespace Notizen
     {
         public class Context : DbContext

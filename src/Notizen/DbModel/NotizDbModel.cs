@@ -11,7 +11,7 @@ namespace Notizen.DbModel
 
 
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Titel { get; set; }
         public string Beschreibung { get; set; }
         public short Wichtigkeit { get; set; }
         public bool Abgeschlossen { get; set; }
