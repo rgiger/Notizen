@@ -1,6 +1,6 @@
 ﻿namespace Notizen.Model
 {
-    public class NotizModelCreate : NotizModelBase
+    public class NotizModelErstellen : NotizModelBase
     {
         
     

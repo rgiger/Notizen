@@ -24,6 +24,7 @@ namespace Notizen.Controllers
         {
             _context = context;
 
+
         }
         //TODO "SASS" für Color.CSS erstellen anstatt einzelne Klassen
         private void setzeStyle()
@@ -37,8 +38,10 @@ namespace Notizen.Controllers
 
             
         }
-        private void changeStyle()
+        public IActionResult WechsleStyle()
         {
+            
+            setzeStyle();
             if (HttpContext.Session.GetString("StyleBootstrap") == null)
             {
                 HttpContext.Session.SetString("StyleBootstrap", lightlayoutBootstrap);
@@ -47,15 +50,9 @@ namespace Notizen.Controllers
                 HttpContext.Session.GetString("StyleBootstrap") == lightlayoutBootstrap
                     ? darklayoutBootstrap
                     : lightlayoutBootstrap);
-        }
-        public IActionResult WechsleStyle()
-        {
-            
-            setzeStyle();
-            changeStyle();
             //TODO auslagern in eine Business Repo
-           // return ViewComponent("MyViewComponent", < arguments...>);
-           return  RedirectToAction("Liste");
+            // return ViewComponent("MyViewComponent", < arguments...>);
+            return  RedirectToAction("Liste");
         }
 
         public IActionResult Liste()
@@ -63,17 +60,17 @@ namespace Notizen.Controllers
             setzeStyle();
 
             //TODO auslagern in eine Business Repo
-            var x = _context.Notizen.ToList().Select(u => new NotizModelList(u)).ToList();
+            var x = _context.Notizen.ToList().Select(u => new NotizModelListe(u)).ToList();
             return View(x);
         }
-
-        public IActionResult Neu()
+        public IActionResult Neu(Guid id)
         {
             setzeStyle();
+
             return View();
         }
         [HttpPost]
-        public IActionResult Neu(NotizModelCreate nm)
+        public IActionResult Neu(NotizModelErstellen nm)
         {
             setzeStyle();
             if (ModelState.IsValid)
@@ -95,10 +92,50 @@ namespace Notizen.Controllers
             return BadRequest(nm);
         }
 
+        public IActionResult Editieren(int Id)
+        {
+            setzeStyle();
+            var x = new NotizModelEditieren(_context.Notizen.First(c => c.Id == Id));
+
+            return View(x);
+        }
+        [HttpPost]
+        public IActionResult Editieren(NotizModelEditieren nm)
+        {
+            setzeStyle();
+            if (ModelState.IsValid)
+            {
+                var x = _context.Notizen.First(c => c.Id == nm.Id);
+                //TODO auslagern in eine Business Repo
+                x.Abgeschlossen = nm.Abgeschlossen;
+                    x.Erstelldatum = nm.Erstelldatum;
+                x.Beschreibung = nm.Beschreibung;
+                x.Wichtigkeit = nm.Wichtigkeit;
+                x.Titel = nm.Titel;
+                x.ErledigtBis = nm.ErledigtBis;
+               
+                
+                _context.SaveChanges();
+                return RedirectToAction("Liste");
+            }
+            return BadRequest(nm);
+        }
+
+
+        //TODO nicht in Notiz controller belassen
         public IActionResult Error()
         {
             setzeStyle();
             return View();
+        }
+
+        public IActionResult Loeschen(int Id)
+        {
+
+            var x = _context.Notizen.First(c => c.Id == Id);
+            _context.Notizen.Remove(x);
+            _context.SaveChanges();
+            return RedirectToAction("Liste");
         }
 
     }

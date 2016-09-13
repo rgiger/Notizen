@@ -2,11 +2,10 @@
 
 namespace Notizen.Model
 {
-    public class NotizModelList : NotizModelBase
+    public class NotizModelListe : NotizModelBase
     {
-        
 
-        public NotizModelList(NotizDbModel u):base(u)
+        public NotizModelListe(NotizDbModel u):base(u)
         {
             Id = u.Id;
         }

@@ -1,16 +1,23 @@
-@model Notizen.Model.NotizModelErstellen
+@model Notizen.Model.NotizModelEditieren
 
 @{
-    ViewData["Title"] = "Neu";
+    ViewData["Title"] = "Editieren";
 }
 
-<h2>Neu</h2>
+<h2>Editieren</h2>
 
-<form asp-action="Neu">
+<form asp-action="Editieren">
     <div class="form-horizontal">
-        <h4>NotizModel</h4>
+        <h4>NotizModelEditieren</h4>
         <hr />
-       
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Id" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger" />
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="Titel" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -56,15 +63,15 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
-@*
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
+
+<div>
+    <a asp-action="Liste">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
