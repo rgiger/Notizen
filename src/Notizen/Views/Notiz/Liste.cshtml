@@ -1,3 +1,6 @@
+@using System.Net
+@using Notizen.Controllers
+@using Notizen.Model
 @model IEnumerable<Notizen.Model.NotizModelListe>
 
 @{
@@ -5,67 +8,77 @@
 }
 
 <h2>Liste</h2>
+<h3>Sortierung</h3>
+@{
+    @Html.ActionLink("Erledigt Bis", "WechsleSortierung", "Notiz", new { Id = SortierungsTyp.ErledigtBisDatum }, new { @class = ViewBag.Sortierung == SortierungsTyp.ErledigtBisDatum.ToString() ? "btnactive" : "btninactive" });<br/>
+    @Html.ActionLink("Wichtigkeit", "WechsleSortierung", "Notiz", new { Id = SortierungsTyp.Wichtigkeit }, new { @class = ViewBag.Sortierung == SortierungsTyp.Wichtigkeit.ToString() ? "btnactive" : "btninactive" });<br />
+    @Html.ActionLink("Erstelldatum", "WechsleSortierung", "Notiz", new { Id = SortierungsTyp.Erstelldatum }, new { @class = ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "btnactive" : "btninactive" });<br />
 
-@*<p>
-    <a asp-action="Neu">Create New</a>
-</p>*@
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Titel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Beschreibung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Wichtigkeit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Abgeschlossen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Erstelldatum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ErledigtBis)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschreibung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wichtigkeit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Abgeschlossen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Erstelldatum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ErledigtBis)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Editieren", new {  Id=item.Id }) |
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Loeschen", "Loeschen", new { Id = item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @Html.ActionLink(ViewBag.FilterAbgeschlossen == true.ToString() ? "abgeschlossene anzeigen" : "abgeschlossene nicht anzeigen", "WechsleFilter");
+
+        }
+                   
+                    @*<p>
+                            <a asp-action="Neu">Create New</a>
+                        </p>*@
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                @*<th>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </th>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Titel)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Beschreibung)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Wichtigkeit)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Abgeschlossen)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Erstelldatum)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ErledigtBis)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                {
+                                <tr>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Titel)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Beschreibung)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Wichtigkeit)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Abgeschlossen)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Erstelldatum)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ErledigtBis)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Editieren", new { Id = item.Id }) |
+                                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                                        @Html.ActionLink("Loeschen", "Loeschen", new { Id = item.Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>

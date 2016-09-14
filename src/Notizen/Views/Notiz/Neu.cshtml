@@ -40,18 +40,25 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="Erstelldatum" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="Erstelldatum" class="form-control" />
                 <span asp-validation-for="Erstelldatum" class="text-danger" />
             </div>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="ErledigtBisDatum" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ErledigtBisDatum" class="form-control" />
+                <span asp-validation-for="ErledigtBisDatum" class="text-danger" />
+            </div>
         </div>
         <div class="form-group">
-            <label asp-for="ErledigtBis" class="col-md-2 control-label"></label>
+            <label asp-for="ErledigtBisZeit" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ErledigtBis" class="form-control" />
-                <span asp-validation-for="ErledigtBis" class="text-danger" />
+                <input asp-for="ErledigtBisZeit" class="form-control" />
+                <span asp-validation-for="ErledigtBisZeit" class="text-danger" />
             </div>
         </div>
         <div class="form-group">

@@ -4,20 +4,17 @@ using Notizen.DbModel;
 
 namespace Notizen.Model
 {
-    public class NotizModelEditieren : NotizModelBase
+    public class NotizModelErstellen : NotizModelBase
     {
-        public NotizModelEditieren():base()
+        public NotizModelErstellen():base()
         {
 
         }
-        public NotizModelEditieren(NotizDbModel u) :base(u)
+        public NotizModelErstellen(NotizDbModel u) :base(u)
         {
             ErledigtBisDatum = u.ErledigtBis.Date;
             ErledigtBisZeit = u.ErledigtBis.TimeOfDay;
-            Id = u.Id;
         }
-
-        public int Id { get; set; }
         [DataType(DataType.Date)]
         public DateTime ErledigtBisDatum { get; set; }
         [DataType(DataType.Time)]

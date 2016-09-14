@@ -17,10 +17,8 @@ namespace Notizen.Model
 
         public NotizModelBase(NotizDbModel u)
         {
-            ErledigtBis = u.ErledigtBis;
             Abgeschlossen = u.Abgeschlossen;
             Beschreibung = u.Beschreibung;
-            Erstelldatum = u.Erstelldatum;
             Id = u.Id;
             Titel = u.Titel;
             Wichtigkeit = u.Wichtigkeit;
@@ -33,10 +31,6 @@ namespace Notizen.Model
         [Range(1, 5)]
         public short Wichtigkeit { get; set; }
         public bool Abgeschlossen { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime Erstelldatum { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime ErledigtBis { get; set; }
 
     }
 }

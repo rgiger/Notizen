@@ -45,6 +45,7 @@ namespace Notizen
             loggerFactory.AddDebug();
             var context = app.ApplicationServices.GetService<Context>();
             AddTestData(context);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,21 +70,21 @@ namespace Notizen
         {
             var notiz1 = new NotizDbModel
             {
-                Erstelldatum = DateTime.Today,
+                Erstelldatum = DateTime.Now.AddDays(-2).AddHours(2).AddMinutes(-12),
                 Beschreibung = "Mit diesem Programm kann man Notizen schreiben.",
                 Wichtigkeit = 1,
                 Titel = "Erste Notiz",
                 Abgeschlossen = false,
-                ErledigtBis = DateTime.Today.AddDays(1)
+                ErledigtBis = DateTime.Now.AddDays(1).AddHours(4).AddMinutes(16)
             };
             var notiz2 = new NotizDbModel
             {
-                Erstelldatum = DateTime.Today,
+                Erstelldatum = DateTime.Now.AddDays(-1).AddHours(-1).AddMinutes(44),
                 Beschreibung = "Am besten sollte man sich alles notieren.",
                 Wichtigkeit = 1,
                 Titel = "Nicht vergessen",
                 Abgeschlossen = false,
-                ErledigtBis = DateTime.Today.AddDays(3)
+                ErledigtBis = DateTime.Now.AddDays(3).AddHours(7).AddMinutes(34)
             };
             context.Add(notiz1);
             context.Add(notiz2);

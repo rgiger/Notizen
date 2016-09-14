@@ -15,6 +15,7 @@ namespace Notizen.DbModel
         public string Beschreibung { get; set; }
         public short Wichtigkeit { get; set; }
         public bool Abgeschlossen { get; set; }
+        //public DateTime? AbgeschlossenDatum { get; set; }
         public DateTime Erstelldatum { get; set; }
         public DateTime ErledigtBis { get; set; }
     }
