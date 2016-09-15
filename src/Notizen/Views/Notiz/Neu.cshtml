@@ -4,40 +4,39 @@
     ViewData["Title"] = "Neu";
 }
 
-<h2>Neu</h2>
+<h2>Neue Notiz</h2>
+<hr />
 
-<form asp-action="Neu">
-    <div class="form-horizontal">
-        <h4>NotizModel</h4>
-        <hr />
-       
+<form asp-action="Neu" class="form-horizontal">
         <div class="form-group">
             <label asp-for="Titel" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <div class="col-sm-10">
                 <input asp-for="Titel" class="form-control" />
                 <span asp-validation-for="Titel" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Beschreibung" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Beschreibung" class="form-control" />
+            <div class="col-sm-10">
+                <textarea asp-for="Beschreibung" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Beschreibung" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Wichtigkeit" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Wichtigkeit" class="form-control" />
-                <span asp-validation-for="Wichtigkeit" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <input asp-for="Abgeschlossen" />
-                    <label asp-for="Abgeschlossen"></label>
-                </div>
+            <div class="col-sm-10">
+              <span class="rating">
+                <input type="radio" class="rating-input" id="rating-input-1-5" asp-for="Wichtigkeit" value="5"/>
+                <label for="rating-input-1-5" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-4" asp-for="Wichtigkeit" value="4"/>
+                <label for="rating-input-1-4" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-3" asp-for="Wichtigkeit" value="3"/>
+                <label for="rating-input-1-3" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-2" asp-for="Wichtigkeit" value="2"/>
+                <label for="rating-input-1-2" class="rating-star"></label>
+                <input type="radio" class="rating-input" id="rating-input-1-1" asp-for="Wichtigkeit" value="1"/>
+                <label for="rating-input-1-1" class="rating-star"></label>
+              </span>
             </div>
         </div>
         @*<div class="form-group">
@@ -48,30 +47,36 @@
             </div>
         </div>*@
         <div class="form-group">
-            <label asp-for="ErledigtBisDatum" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+        <div class="row">
+            <div class="col-xs-3">
+                <label class="col-xs-2 control-label">Erledigt bis Datum</label>
                 <input asp-for="ErledigtBisDatum" class="form-control" />
                 <span asp-validation-for="ErledigtBisDatum" class="text-danger" />
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ErledigtBisZeit" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
+            <div class="col-xs-2">
+                <label class="col-xs-2 control-label">Erledigt bis Zeit</label>
                 <input asp-for="ErledigtBisZeit" class="form-control" />
                 <span asp-validation-for="ErledigtBisZeit" class="text-danger" />
             </div>
         </div>
+        </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <input asp-for="Abgeschlossen" />
+                    <label asp-for="Abgeschlossen"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-    </div>
 </form>
-@*
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
+<div>
+  <a asp-action="Liste">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -7,6 +7,11 @@
     ViewData["Title"] = "Liste";
 }
 
+<ol class="button">
+    <li class="btn btn-default"><a asp-area="" asp-controller="Notiz" asp-action="Neu">Neue Notiz</a></li>
+    <li class="btn btn-default"><a asp-area="" asp-controller="Notiz" asp-action="WechsleStyle">wechsle Style</a></li>
+</ol>
+
 <h2>Liste</h2>
 <h3>Sortierung</h3>
 @{
@@ -21,6 +26,66 @@
                     @*<p>
                             <a asp-action="Neu">Create New</a>
                         </p>*@
+
+<ol>
+@foreach (var item in Model)
+{
+    <li>
+        <div class="itemrow">
+          <div class="erledigtbis">@Html.DisplayFor(modelItem => item.ErledigtBis)</div>
+          <div class="titel">@Html.DisplayFor(modelItem => item.Titel)</div>
+          <div class="wichtigkeit">
+              <span class="rating">
+                  <div class="rating-static rating-on"></div>
+                  @if(item.Wichtigkeit > 1) {
+                    <div class="rating-static rating-on"></div>
+                  } else {
+                    <div class="rating-static rating-off"></div>
+                  }
+                  @if(item.Wichtigkeit > 2) {
+                    <div class="rating-static rating-on"></div>
+                  } else {
+                    <div class="rating-static rating-off"></div>
+                  }
+                  @if(item.Wichtigkeit > 3) {
+                    <div class="rating-static rating-on"></div>
+                  } else {
+                    <div class="rating-static rating-off"></div>
+                  }
+                  @if(item.Wichtigkeit > 4) {
+                    <div class="rating-static rating-on"></div>
+                  } else {
+                    <div class="rating-static rating-off"></div>
+                  }
+              </span>
+              </div>
+        </div>
+          @if(item.Abgeschlossen == true) {
+            <div class="checkbox disabled">
+              <label>
+                <input type="checkbox" value="" checked disabled>
+                Erledigt [wann??]
+              </label>
+            </div>
+          } else {
+            <div class="checkbox disabled">
+              <label>
+                <input type="checkbox" value="" disabled>
+                Erledigt
+              </label>
+            </div>
+          }
+          <div class="beschreibung">@Html.DisplayFor(modelItem => item.Beschreibung)</div>
+          <div class="editieren">@Html.ActionLink("Edit", "Editieren", new { Id = item.Id })</div>
+          <div class="loeschen">@Html.ActionLink("Loeschen", "Löschen", new { Id = item.Id })</div>
+    </li>
+}
+</ol>
+
+
+
+
+
                     <table class="table">
                         <thead>
                             <tr>
