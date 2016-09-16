@@ -4,15 +4,14 @@ namespace Notizen.DbModel
 {
     namespace Notizen
     {
-        public class Context : DbContext
+        public class ApplicationDbContext : DbContext
         {
-            public Context(DbContextOptions<Context> options)
+            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
                 : base(options)
             {
             }
 
             public DbSet<NotizDbModel> Notizen { get; set; }
-            
         }
     }
 }

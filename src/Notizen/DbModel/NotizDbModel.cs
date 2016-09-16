@@ -1,15 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Notizen.DbModel;
-using Notizen.Model;
 
 namespace Notizen.DbModel
 {
     public class NotizDbModel
     {
-
-
         public int Id { get; set; }
         public string Titel { get; set; }
         public string Beschreibung { get; set; }

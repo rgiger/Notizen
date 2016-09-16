@@ -1,5 +1,3 @@
-@using System.Net
-@using Notizen.Controllers
 @using Notizen.Model
 @model IEnumerable<Notizen.Model.NotizModelListe>
 
@@ -8,142 +6,164 @@
 }
 
 <ol class="button">
-    <li class="btn btn-default"><a asp-area="" asp-controller="Notiz" asp-action="Neu">Neue Notiz</a></li>
-    <li class="btn btn-default"><a asp-area="" asp-controller="Notiz" asp-action="WechsleStyle">wechsle Style</a></li>
+    <li class="btn btn-default">
+        <a asp-area="" asp-controller="Notiz" asp-action="Neu">Neue Notiz</a>
+    </li>
+    <li class="btn btn-default">
+        <a asp-area="" asp-controller="Notiz" asp-action="WechsleStyle">wechsle Style</a>
+    </li>
 </ol>
 
 <h2>Liste</h2>
 <h3>Sortierung</h3>
 @{
-    @Html.ActionLink("Erledigt Bis", "WechsleSortierung", "Notiz", new { Id = SortierungsTyp.ErledigtBisDatum }, new { @class = ViewBag.Sortierung == SortierungsTyp.ErledigtBisDatum.ToString() ? "btnactive" : "btninactive" });<br/>
-    @Html.ActionLink("Wichtigkeit", "WechsleSortierung", "Notiz", new { Id = SortierungsTyp.Wichtigkeit }, new { @class = ViewBag.Sortierung == SortierungsTyp.Wichtigkeit.ToString() ? "btnactive" : "btninactive" });<br />
-    @Html.ActionLink("Erstelldatum", "WechsleSortierung", "Notiz", new { Id = SortierungsTyp.Erstelldatum }, new { @class = ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "btnactive" : "btninactive" });<br />
+    @Html.ActionLink("Erledigt Bis", "WechsleSortierung", "Notiz", new {Id = SortierungsTyp.ErledigtBisDatum}, new {@class = ViewBag.Sortierung == SortierungsTyp.ErledigtBisDatum.ToString() ? "btnactive" : "btninactive"})
+    ;
+    <br/>
+    @Html.ActionLink("Wichtigkeit", "WechsleSortierung", "Notiz", new {Id = SortierungsTyp.Wichtigkeit}, new {@class = ViewBag.Sortierung == SortierungsTyp.Wichtigkeit.ToString() ? "btnactive" : "btninactive"})
+    ;
+    <br/>
+    @Html.ActionLink("Erstelldatum", "WechsleSortierung", "Notiz", new {Id = SortierungsTyp.Erstelldatum}, new {@class = ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "btnactive" : "btninactive"})
+    ;
+    <br/>
 
-    @Html.ActionLink(ViewBag.FilterAbgeschlossen == true.ToString() ? "abgeschlossene anzeigen" : "abgeschlossene nicht anzeigen", "WechsleFilter");
+    @Html.ActionLink(ViewBag.FilterAbgeschlossen == true.ToString() ? "abgeschlossene anzeigen" : "abgeschlossene nicht anzeigen", "WechsleFilter")
+    ;
+}
 
-        }
-                   
-                    @*<p>
+@*<p>
                             <a asp-action="Neu">Create New</a>
                         </p>*@
 
 <ol>
-@foreach (var item in Model)
-{
-    <li>
-        <div class="itemrow">
-          <div class="erledigtbis">@Html.DisplayFor(modelItem => item.ErledigtBis)</div>
-          <div class="titel">@Html.DisplayFor(modelItem => item.Titel)</div>
-          <div class="wichtigkeit">
-              <span class="rating">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="itemrow">
+                <div class="erledigtbis">@Html.DisplayFor(modelItem => item.ErledigtBis)</div>
+                <div class="titel">@Html.DisplayFor(modelItem => item.Titel)</div>
+                <div class="wichtigkeit">
+                    <span class="rating">
                   <div class="rating-static rating-on"></div>
-                  @if(item.Wichtigkeit > 1) {
-                    <div class="rating-static rating-on"></div>
-                  } else {
-                    <div class="rating-static rating-off"></div>
+                  @if (item.Wichtigkeit > 1)
+                  {
+                      <div class="rating-static rating-on"></div>
                   }
-                  @if(item.Wichtigkeit > 2) {
-                    <div class="rating-static rating-on"></div>
-                  } else {
-                    <div class="rating-static rating-off"></div>
+                  else
+                  {
+                      <div class="rating-static rating-off"></div>
                   }
-                  @if(item.Wichtigkeit > 3) {
-                    <div class="rating-static rating-on"></div>
-                  } else {
-                    <div class="rating-static rating-off"></div>
+                  @if (item.Wichtigkeit > 2)
+                  {
+                      <div class="rating-static rating-on"></div>
                   }
-                  @if(item.Wichtigkeit > 4) {
-                    <div class="rating-static rating-on"></div>
-                  } else {
-                    <div class="rating-static rating-off"></div>
+                  else
+                  {
+                      <div class="rating-static rating-off"></div>
+                  }
+                  @if (item.Wichtigkeit > 3)
+                  {
+                      <div class="rating-static rating-on"></div>
+                  }
+                  else
+                  {
+                      <div class="rating-static rating-off"></div>
+                  }
+                  @if (item.Wichtigkeit > 4)
+                  {
+                      <div class="rating-static rating-on"></div>
+                  }
+                  else
+                  {
+                      <div class="rating-static rating-off"></div>
                   }
               </span>
-              </div>
-        </div>
-          @if(item.Abgeschlossen == true) {
-            <div class="checkbox disabled">
-              <label>
-                <input type="checkbox" value="" checked disabled>
-                Erledigt [wann??]
-              </label>
+                </div>
             </div>
-          } else {
-            <div class="checkbox disabled">
-              <label>
-                <input type="checkbox" value="" disabled>
-                Erledigt
-              </label>
-            </div>
-          }
-          <div class="beschreibung">@Html.DisplayFor(modelItem => item.Beschreibung)</div>
-          <div class="editieren">@Html.ActionLink("Edit", "Editieren", new { Id = item.Id })</div>
-          <div class="loeschen">@Html.ActionLink("Loeschen", "Löschen", new { Id = item.Id })</div>
-    </li>
-}
+            @if (item.Abgeschlossen)
+            {
+                <div class="checkbox disabled">
+                    <label>
+                        <input type="checkbox" value="" checked disabled>
+                        Erledigt [wann??]
+                    </label>
+                </div>
+            }
+            else
+            {
+                <div class="checkbox disabled">
+                    <label>
+                        <input type="checkbox" value="" disabled>
+                        Erledigt
+                    </label>
+                </div>
+            }
+            <div class="beschreibung">@Html.DisplayFor(modelItem => item.Beschreibung)</div>
+            <div class="editieren">@Html.ActionLink("Edit", "Editieren", new {item.Id})</div>
+            <div class="loeschen">@Html.ActionLink("Loeschen", "Loeschen", new {item.Id})</div>
+        </li>
+    }
 </ol>
 
 
-
-
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                @*<th>
+<table class="table">
+    <thead>
+    <tr>
+        @*<th>
                                     @Html.DisplayNameFor(model => model.Id)
                                 </th>*@
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Titel)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Beschreibung)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Wichtigkeit)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Abgeschlossen)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Erstelldatum)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ErledigtBis)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                {
-                                <tr>
-                                    @*<td>
+        <th>
+            @Html.DisplayNameFor(model => model.Titel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beschreibung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Wichtigkeit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Abgeschlossen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Erstelldatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ErledigtBis)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
                                         @Html.DisplayFor(modelItem => item.Id)
                                     </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Titel)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Beschreibung)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Wichtigkeit)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Abgeschlossen)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Erstelldatum)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ErledigtBis)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Editieren", new { Id = item.Id }) |
-                                        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                                        @Html.ActionLink("Loeschen", "Loeschen", new { Id = item.Id })
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschreibung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wichtigkeit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abgeschlossen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Erstelldatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErledigtBis)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Editieren", new {item.Id}) |
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Loeschen", "Loeschen", new {item.Id})
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

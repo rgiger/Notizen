@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -15,13 +12,12 @@ namespace Notizen
 {
     public class Startup
     {
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -32,7 +28,7 @@ namespace Notizen
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
@@ -43,9 +39,9 @@ namespace Notizen
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            var context = app.ApplicationServices.GetService<Context>();
+            var context = app.ApplicationServices.GetService<ApplicationDbContext>();
             AddTestData(context);
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -61,12 +57,12 @@ namespace Notizen
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Notiz}/{action=Liste}/{id?}");
+                    "default",
+                    "{controller=Notiz}/{action=Liste}/{id?}");
             });
         }
 
-        private void AddTestData(Context context)
+        private void AddTestData(ApplicationDbContext context)
         {
             var notiz1 = new NotizDbModel
             {
