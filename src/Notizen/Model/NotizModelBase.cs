@@ -25,6 +25,7 @@ namespace Notizen.Model
 
         public string Beschreibung { get; set; }
 
+        [Required]
         [Range(1, 5)]
         public short Wichtigkeit { get; set; }
 
