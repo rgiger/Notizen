@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 using Notizen.DbModel;
 using Notizen.DbModel.Notizen;
 
@@ -41,6 +44,19 @@ namespace Notizen
             loggerFactory.AddDebug();
             var context = app.ApplicationServices.GetService<ApplicationDbContext>();
             AddTestData(context);
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(new CultureInfo("de-ch")),
+                SupportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("de-ch")
+                },
+                SupportedUICultures = new List<CultureInfo>
+                {
+                    new CultureInfo("de-ch")
+                }
+            });
 
             if (env.IsDevelopment())
             {
