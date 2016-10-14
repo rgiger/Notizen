@@ -1,10 +1,10 @@
 @model Notizen.Model.NotizModelErstellen
 
 @{
-    ViewData["Title"] = "Neu";
+    ViewData["Title"] = "Neue Notiz";
 }
 
-<h2>Neue Notiz</h2>
+<h2>@ViewData["Title"]</h2>
 <hr/>
 
 <div class="form-horizontal">
@@ -71,7 +71,7 @@
         </div>
     </form>
     <div>
-        <a asp-action="Liste">Back to List</a>
+        <a asp-action="Liste">Zurück zur Liste</a>
     </div>
 </div>
 
