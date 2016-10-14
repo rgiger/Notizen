@@ -38,14 +38,11 @@
             </div>
             <div class="checkbox disabled">
                 <label>
-                    <input type="checkbox" value="" disabled @(item.Abgeschlossen ? "checked": "")>
+                    <input type="checkbox" value="" disabled @(item.AbgeschlossenZeitpunkt.HasValue ? "checked": "")>
                     <span>Erledigt
                     @if (item.AbgeschlossenZeitpunkt.HasValue)
                     {
-                        <span>[
-                            <span class="relativedate" title="@item.ErledigtBis">@item.ErledigtBis</span>] 
-                            <span style="color:red" title="TODO: Abschlussdatum im Model speichern">@item.AbgeschlossenZeitpunkt</span>
-                        </span>
+                        <span>[<span class="relativedate" title="@item.AbgeschlossenZeitpunkt">@item.AbgeschlossenZeitpunkt</span>]</span>
                     }
                     </span>
                 </label>
