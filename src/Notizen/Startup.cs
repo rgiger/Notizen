@@ -86,7 +86,7 @@ namespace Notizen
                 Beschreibung = "Mit diesem Programm kann man Notizen schreiben.",
                 Wichtigkeit = 1,
                 Titel = "Erste Notiz",
-                Abgeschlossen = false,
+                AbgeschlossenZeitpunkt = null,
                 ErledigtBis = DateTime.Now.AddDays(1).AddHours(4).AddMinutes(16)
             };
             var notiz2 = new NotizDbModel
@@ -95,7 +95,7 @@ namespace Notizen
                 Beschreibung = "Am besten sollte man sich alles notieren.",
                 Wichtigkeit = 1,
                 Titel = "Nicht vergessen",
-                Abgeschlossen = false,
+                AbgeschlossenZeitpunkt = DateTime.Now.AddHours(-1),
                 ErledigtBis = DateTime.Now.AddDays(3).AddHours(7).AddMinutes(34)
             };
             context.Add(notiz1);

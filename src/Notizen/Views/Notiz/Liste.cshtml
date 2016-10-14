@@ -18,7 +18,7 @@
     <li><a asp-action="WechsleSortierung" asp-route-id="@SortierungsTyp.Wichtigkeit" class="btn btn-default @(ViewBag.Sortierung == SortierungsTyp.Wichtigkeit.ToString() ? "active" : "")">Wichtigkeit</a></li>
     <li><a asp-action="WechsleSortierung" asp-route-id="@SortierungsTyp.Erstelldatum" class="btn btn-default @(ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "active" : "")">Erstelldatum</a></li>
     <li><a asp-action="WechsleFilter" class="btn btn-default @(ViewBag.FilterAbgeschlossen == true.ToString() ? "active" : "")">Abgeschlossene ausblenden</a></li>
-    </li>
+
 </ul>
 @if(Model.Any()) {
     <ol class="list-unstyled">
@@ -42,7 +42,10 @@
                     <span>Erledigt
                     @if (item.Abgeschlossen)
                     {
-                        <span>[<span class="relativedate" title="@item.ErledigtBis">@item.ErledigtBis</span>] <span style="color:red" title="TODO: Abschlussdatum im Model speichern">TODO</span></span>
+                        <span>[
+                            <span class="relativedate" title="@item.ErledigtBis">@item.ErledigtBis</span>] 
+                            <span style="color:red" title="TODO: Abschlussdatum im Model speichern">@item.AbgeschlossenZeitpunkt</span>
+                        </span>
                     }
                     </span>
                 </label>

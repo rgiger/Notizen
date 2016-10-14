@@ -47,13 +47,13 @@ namespace Notizen.Test
         }
 
         [Fact]
-        public void GetListeLeer()
+        public void GetNotiz()
         {
             
             var controller = new NotizController(_dbContext);
-            var x = ((ContentResult)controller.Liste()).Content;
-             Assert.Equal("", x);
-            // Assert.NotEqual(name, ((ContentResult)controller.Name(settingLower)).Content);
+            var x = ((ContentResult)controller.Editieren(1)).Content;
+            var y = ((ContentResult)controller.Editieren(99)).Content;
+            //  Assert.NotEqual(name, ((ContentResult)controller.Name(settingLower)).Content);
         }
 
     }

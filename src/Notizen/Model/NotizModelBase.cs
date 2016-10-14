@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Notizen.DbModel;
 
 namespace Notizen.Model
@@ -11,12 +12,17 @@ namespace Notizen.Model
 
         public NotizModelBase(NotizDbModel u)
         {
-            Abgeschlossen = u.Abgeschlossen;
+            Abgeschlossen = u.AbgeschlossenZeitpunkt.HasValue;
+                if (u.AbgeschlossenZeitpunkt != null) AbgeschlossenZeitpunkt = u.AbgeschlossenZeitpunkt.Value;
             Beschreibung = u.Beschreibung;
             Id = u.Id;
             Titel = u.Titel;
             Wichtigkeit = u.Wichtigkeit;
         }
+
+
+        [DataType(DataType.DateTime)]
+        public DateTime AbgeschlossenZeitpunkt { get; set; }
 
         public int Id { get; set; }
 
@@ -30,5 +36,6 @@ namespace Notizen.Model
         public short Wichtigkeit { get; set; }
 
         public bool Abgeschlossen { get; set; }
+
     }
 }

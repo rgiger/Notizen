@@ -117,7 +117,7 @@ namespace Notizen.Controllers
                 zuErledigenbis = zuErledigenbis.Add(nm.ErledigtBisZeit);
                 var neueNotiz = new NotizDbModel
                 {
-                    Abgeschlossen = nm.Abgeschlossen,
+                    //Abgeschlossen = nm.Abgeschlossen,
                     Erstelldatum = DateTime.Now,
                     Beschreibung = nm.Beschreibung,
                     Wichtigkeit = nm.Wichtigkeit,
@@ -125,6 +125,10 @@ namespace Notizen.Controllers
                     ErledigtBis = zuErledigenbis,
                     Id = nm.Id
                 };
+                if (nm.Abgeschlossen)
+                {
+                    nm.AbgeschlossenZeitpunkt = DateTime.Now;
+                }
                 _context.Notizen.Add(neueNotiz);
                 _context.SaveChanges();
                 return RedirectToAction("Liste");
@@ -153,11 +157,29 @@ namespace Notizen.Controllers
                 var zuErledigenbis = nm.ErledigtBisDatum;
                 zuErledigenbis = zuErledigenbis.Add(nm.ErledigtBisZeit);
                 var x = _context.Notizen.First(c => c.Id == nm.Id);
-                x.Abgeschlossen = nm.Abgeschlossen;
+
+                if (!x.AbgeschlossenZeitpunkt.HasValue)
+                {
+                    if (nm.Abgeschlossen)
+                    {
+                        x.AbgeschlossenZeitpunkt = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    if (!nm.Abgeschlossen)
+                    {
+                        x.AbgeschlossenZeitpunkt = null;
+                    }
+
+                }
+                //  x.Abgeschlossen = nm.Abgeschlossen;
+
                 x.Beschreibung = nm.Beschreibung;
                 x.Wichtigkeit = nm.Wichtigkeit;
                 x.Titel = nm.Titel;
                 x.ErledigtBis = zuErledigenbis;
+                
 
 
                 _context.SaveChanges();

@@ -21,5 +21,6 @@ namespace Notizen.Model
 
         [DataType(DataType.Time)]
         public TimeSpan ErledigtBisZeit { get; set; }
+
     }
 }
