@@ -13,7 +13,7 @@ namespace Notizen.Model
         public NotizModelBase(NotizDbModel u)
         {
             Abgeschlossen = u.AbgeschlossenZeitpunkt.HasValue;
-                if (u.AbgeschlossenZeitpunkt != null) AbgeschlossenZeitpunkt = u.AbgeschlossenZeitpunkt.Value;
+            AbgeschlossenZeitpunkt = u.AbgeschlossenZeitpunkt;
             Beschreibung = u.Beschreibung;
             Id = u.Id;
             Titel = u.Titel;
@@ -22,7 +22,7 @@ namespace Notizen.Model
 
 
         [DataType(DataType.DateTime)]
-        public DateTime AbgeschlossenZeitpunkt { get; set; }
+        public DateTime? AbgeschlossenZeitpunkt { get; set; }
 
         public int Id { get; set; }
 

@@ -18,7 +18,6 @@ namespace Notizen.Model
 
         [DataType(DataType.DateTime)]
         public DateTime Erstelldatum { get; set; }
-
-
+        
     }
 }

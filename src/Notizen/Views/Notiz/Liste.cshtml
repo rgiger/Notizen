@@ -40,7 +40,7 @@
                 <label>
                     <input type="checkbox" value="" disabled @(item.Abgeschlossen ? "checked": "")>
                     <span>Erledigt
-                    @if (item.Abgeschlossen)
+                    @if (item.AbgeschlossenZeitpunkt.HasValue)
                     {
                         <span>[
                             <span class="relativedate" title="@item.ErledigtBis">@item.ErledigtBis</span>] 
