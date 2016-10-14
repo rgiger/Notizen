@@ -93,7 +93,7 @@ namespace Notizen
             {
                 Erstelldatum = DateTime.Now.AddDays(-1).AddHours(-1).AddMinutes(44),
                 Beschreibung = "Am besten sollte man sich alles notieren.",
-                Wichtigkeit = 1,
+                Wichtigkeit = 5,
                 Titel = "Nicht vergessen",
                 AbgeschlossenZeitpunkt = DateTime.Now.AddHours(-1),
                 ErledigtBis = DateTime.Now.AddDays(3).AddHours(7).AddMinutes(34)
