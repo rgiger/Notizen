@@ -5,165 +5,58 @@
     ViewData["Title"] = "Liste";
 }
 
-<ol class="button">
-    <li class="btn btn-default">
-        <a asp-area="" asp-controller="Notiz" asp-action="Neu">Neue Notiz</a>
+<ul class="list-unstyled">
+    <li>
+        <a asp-action="Neu" class="btn btn-default">Neue Notiz</a>
     </li>
-    <li class="btn btn-default">
-        <a asp-area="" asp-controller="Notiz" asp-action="WechsleStyle">wechsle Style</a>
+    <li>
+        <a asp-action="WechsleStyle" class="btn btn-default">wechsle Style</a>
     </li>
-</ol>
-
-<h2>Liste</h2>
-<h3>Sortierung</h3>
-@{
-    @Html.ActionLink("Erledigt Bis", "WechsleSortierung", "Notiz", new {Id = SortierungsTyp.ErledigtBisDatum}, new {@class = ViewBag.Sortierung == SortierungsTyp.ErledigtBisDatum.ToString() ? "btnactive" : "btninactive"})
-    ;
-    <br/>
-    @Html.ActionLink("Wichtigkeit", "WechsleSortierung", "Notiz", new {Id = SortierungsTyp.Wichtigkeit}, new {@class = ViewBag.Sortierung == SortierungsTyp.Wichtigkeit.ToString() ? "btnactive" : "btninactive"})
-    ;
-    <br/>
-    @Html.ActionLink("Erstelldatum", "WechsleSortierung", "Notiz", new {Id = SortierungsTyp.Erstelldatum}, new {@class = ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "btnactive" : "btninactive"})
-    ;
-    <br/>
-
-    @Html.ActionLink(ViewBag.FilterAbgeschlossen == true.ToString() ? "abgeschlossene anzeigen" : "abgeschlossene nicht anzeigen", "WechsleFilter")
-    ;
-}
-
-@*<p>
-                            <a asp-action="Neu">Create New</a>
-                        </p>*@
-
-<ol>
-    @foreach (var item in Model)
-    {
+</ul>
+<ul class="list-unstyled">
+    <li><a asp-action="WechsleSortierung" asp-route-id="@SortierungsTyp.ErledigtBisDatum" class="btn btn-default @(ViewBag.Sortierung == SortierungsTyp.ErledigtBisDatum.ToString() ? "active" : "")">Erledigt Bis</a></li>
+    <li><a asp-action="WechsleSortierung" asp-route-id="@SortierungsTyp.Wichtigkeit" class="btn btn-default @(ViewBag.Sortierung == SortierungsTyp.Wichtigkeit.ToString() ? "active" : "")">Wichtigkeit</a></li>
+    <li><a asp-action="WechsleSortierung" asp-route-id="@SortierungsTyp.Erstelldatum" class="btn btn-default @(ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "active" : "")">Erstelldatum</a></li>
+    <li><a asp-action="WechsleFilter" class="btn btn-default @(ViewBag.FilterAbgeschlossen == true.ToString() ? "active" : "")">Abgeschlossene ausblenden</a></li>
+    </li>
+</ul>
+@if(Model.Any()) {
+    <ol class="list-unstyled">
+        @foreach (var item in Model)
+        {
         <li>
-            <div class="itemrow">
-                <div class="erledigtbis">@Html.DisplayFor(modelItem => item.ErledigtBis)</div>
-                <div class="titel">@Html.DisplayFor(modelItem => item.Titel)</div>
-                <div class="wichtigkeit">
+            <div>
+                <div>Bis <span class="relativedate">@item.ErledigtBis</span></div>
+                <div>@item.Titel</div>
+                <div>
                     <span class="rating">
-                  <div class="rating-static rating-on"></div>
-                  @if (item.Wichtigkeit > 1)
-                  {
-                      <div class="rating-static rating-on"></div>
-                  }
-                  else
-                  {
-                      <div class="rating-static rating-off"></div>
-                  }
-                  @if (item.Wichtigkeit > 2)
-                  {
-                      <div class="rating-static rating-on"></div>
-                  }
-                  else
-                  {
-                      <div class="rating-static rating-off"></div>
-                  }
-                  @if (item.Wichtigkeit > 3)
-                  {
-                      <div class="rating-static rating-on"></div>
-                  }
-                  else
-                  {
-                      <div class="rating-static rating-off"></div>
-                  }
-                  @if (item.Wichtigkeit > 4)
-                  {
-                      <div class="rating-static rating-on"></div>
-                  }
-                  else
-                  {
-                      <div class="rating-static rating-off"></div>
-                  }
-              </span>
+                        @for(int i = 0; i < 5; i++) {
+                            <div class="rating-static rating-@(item.Wichtigkeit > i ? "on" : "off")"></div>
+                        }
+                    </span>
                 </div>
             </div>
-            @if (item.Abgeschlossen)
-            {
-                <div class="checkbox disabled">
-                    <label>
-                        <input type="checkbox" value="" checked disabled>
-                        Erledigt [wann??]
-                    </label>
-                </div>
-            }
-            else
-            {
-                <div class="checkbox disabled">
-                    <label>
-                        <input type="checkbox" value="" disabled>
-                        Erledigt
-                    </label>
-                </div>
-            }
-            <div class="beschreibung">@Html.DisplayFor(modelItem => item.Beschreibung)</div>
-            <div class="editieren">@Html.ActionLink("Edit", "Editieren", new {item.Id})</div>
-            <div class="loeschen">@Html.ActionLink("Loeschen", "Loeschen", new {item.Id})</div>
+            <div class="checkbox disabled">
+                <label>
+                    <input type="checkbox" value="" disabled @(item.Abgeschlossen ? "checked": "")>
+                    <span>Erledigt
+                    @if (item.Abgeschlossen)
+                    {
+                        <span>[<span class="relativedate" title="@item.ErledigtBis">@item.ErledigtBis</span>] <span style="color:red" title="TODO: Abschlussdatum im Model speichern">TODO</span></span>
+                    }
+                    </span>
+                </label>
+            </div>
+            <div class="form-group"><textarea class="form-control" rows="3" disabled>@item.Beschreibung</textarea></div>
+            <div>
+                <a asp-action="Editieren" asp-route-id="@item.Id" class="btn btn-default">Editieren</a>
+                <a asp-action="Loeschen" asp-route-id="@item.Id" class="btn btn-danger">Löschen</a>
+            </div>
         </li>
-    }
-</ol>
-
-
-<table class="table">
-    <thead>
-    <tr>
-        @*<th>
-                                    @Html.DisplayNameFor(model => model.Id)
-                                </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Titel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Beschreibung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wichtigkeit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Abgeschlossen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Erstelldatum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ErledigtBis)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            @*<td>
-                                        @Html.DisplayFor(modelItem => item.Id)
-                                    </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Titel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschreibung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wichtigkeit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Abgeschlossen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Erstelldatum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ErledigtBis)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Editieren", new {item.Id}) |
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Loeschen", "Loeschen", new {item.Id})
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+        }
+    </ol>
+}
+else
+{
+    <div class="alert alert-success" role="alert">Keine Notizen. Alles erledigt!</div>
+}
