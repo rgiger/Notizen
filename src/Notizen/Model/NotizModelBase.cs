@@ -15,7 +15,6 @@ namespace Notizen.Model
             Abgeschlossen = u.AbgeschlossenZeitpunkt.HasValue;
             AbgeschlossenZeitpunkt = u.AbgeschlossenZeitpunkt;
             Beschreibung = u.Beschreibung;
-            Id = u.Id;
             Titel = u.Titel;
             Wichtigkeit = u.Wichtigkeit;
         }
@@ -24,7 +23,6 @@ namespace Notizen.Model
         [DataType(DataType.DateTime)]
         public DateTime? AbgeschlossenZeitpunkt { get; set; }
 
-        public int Id { get; set; }
 
         [Required]
         public string Titel { get; set; }

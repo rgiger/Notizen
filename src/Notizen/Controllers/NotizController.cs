@@ -85,9 +85,7 @@ namespace Notizen.Controllers
 
         private List<NotizModelListe> FilterListe(List<NotizModelListe> x)
         {
-            if (HttpContext.Session.GetString(FilterAbgeschlossen) == true.ToString())
-                x = x.Where(c => !c.Abgeschlossen).ToList();
-            return x;
+            return HttpContext.Session.GetString(FilterAbgeschlossen) == true.ToString() ? x.Where(c => !c.Abgeschlossen).ToList() : x;
         }
 
         private List<NotizModelListe> SortiereListe(List<NotizModelListe> x)
@@ -114,7 +112,10 @@ namespace Notizen.Controllers
             if (ModelState.IsValid)
             {
                 var zuErledigenbis = nm.ErledigtBisDatum;
-                zuErledigenbis = zuErledigenbis.Add(nm.ErledigtBisZeit);
+                if (nm.ErledigtBisZeit.HasValue)
+                {
+                    zuErledigenbis = zuErledigenbis?.Add(nm.ErledigtBisZeit.Value);
+                }
                 var neueNotiz = new NotizDbModel
                 {
                     //Abgeschlossen = nm.Abgeschlossen,
@@ -123,7 +124,7 @@ namespace Notizen.Controllers
                     Wichtigkeit = nm.Wichtigkeit,
                     Titel = nm.Titel,
                     ErledigtBis = zuErledigenbis,
-                    Id = nm.Id
+                    //Id = nm.Id
                 };
                 if (nm.Abgeschlossen)
                 {
@@ -155,7 +156,10 @@ namespace Notizen.Controllers
             if (ModelState.IsValid)
             {
                 var zuErledigenbis = nm.ErledigtBisDatum;
-                zuErledigenbis = zuErledigenbis.Add(nm.ErledigtBisZeit);
+                if (nm.ErledigtBisZeit.HasValue)
+                {
+                    zuErledigenbis = zuErledigenbis?.Add(nm.ErledigtBisZeit.Value);
+                }
                 var x = _context.Notizen.First(c => c.Id == nm.Id);
 
                 if (!x.AbgeschlossenZeitpunkt.HasValue)
@@ -173,15 +177,12 @@ namespace Notizen.Controllers
                     }
 
                 }
-                //  x.Abgeschlossen = nm.Abgeschlossen;
 
                 x.Beschreibung = nm.Beschreibung;
                 x.Wichtigkeit = nm.Wichtigkeit;
                 x.Titel = nm.Titel;
                 x.ErledigtBis = zuErledigenbis;
                 
-
-
                 _context.SaveChanges();
                 return RedirectToAction("Liste");
             }

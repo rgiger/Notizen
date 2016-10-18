@@ -11,7 +11,14 @@
                     }
                 </span>
             </div>
-            <div class="notiz-head-links">Bis <span class="relativedate" title="@Model.ErledigtBis">@Model.ErledigtBis</span></div>
+            @if (Model.ErledigtBis.HasValue)
+            {
+                <div class="notiz-head-links">Bis <span class="relativedate" title="@Model.ErledigtBis">@Model.ErledigtBis</span></div>
+            }
+            else
+            {
+                <div class="notiz-head-links">Irgendwann</div>
+            }
         </div>
         <div class="notiz-body">
             <div class="notiz-body-links">

@@ -13,11 +13,13 @@ namespace Notizen.Model
             Erstelldatum = u.Erstelldatum;
         }
 
+        public int Id { get; set; }
+
         [DataType(DataType.DateTime)]
-        public DateTime ErledigtBis { get; set; }
+        public DateTime? ErledigtBis { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime Erstelldatum { get; set; }
-        
+
     }
 }

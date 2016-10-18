@@ -24,7 +24,7 @@ using Notizen.Controllers;
 using Notizen.DbModel.Notizen;
 using Xunit;
 
-namespace Notizen.Test
+namespace Notizen.Test.Controller
 {
     public class NotizControllerTest
     {
