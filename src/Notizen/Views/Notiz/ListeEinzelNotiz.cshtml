@@ -1,0 +1,36 @@
+﻿@model Notizen.Model.NotizModelListe
+<li>
+    <div class="notiz-inhalt">
+        <div class="notiz-head">
+            <div class="notiz-head-rechts">
+                <div class="notiz-titel">@Model.Titel</div>
+                <span class="rating">
+                    @for (int i = 0; i < Model.Wichtigkeit; i++)
+                    {
+                        <div class="rating-static rating-on"></div>
+                    }
+                </span>
+            </div>
+            <div class="notiz-head-links">Bis <span class="relativedate" title="@Model.ErledigtBis">@Model.ErledigtBis</span></div>
+        </div>
+        <div class="notiz-body">
+            <div class="notiz-body-links">
+                <label>
+                    <input type="checkbox" value="" disabled @(Model.AbgeschlossenZeitpunkt.HasValue ? "checked" : "")>
+                    <span>
+                        Erledigt
+                        @if (Model.AbgeschlossenZeitpunkt.HasValue)
+                        {
+                            <span class="notiz-abgeschlossenzeitpunkt">[<span class="relativedate" title="@Model.AbgeschlossenZeitpunkt">@Model.AbgeschlossenZeitpunkt</span>]</span>
+                        }
+                    </span>
+                </label>
+            </div>
+            <div class="notiz-body-rechts"><textarea class="form-control" rows="3" disabled>@Model.Beschreibung</textarea></div>
+        </div>
+    </div>
+    <div class="notiz-buttons">
+        <a asp-action="Editieren" asp-route-id="@Model.Id" class="btn btn-default">Editieren</a>
+        <a asp-action="Loeschen" asp-route-id="@Model.Id" class="btn btn-danger">Löschen</a>
+    </div>
+</li>
