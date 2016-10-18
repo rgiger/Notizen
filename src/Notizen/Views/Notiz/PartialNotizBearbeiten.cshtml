@@ -1,0 +1,57 @@
+﻿@model Notizen.Model.NotizModelErstellen
+
+<div class="form-group">
+    <label asp-for="Titel" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Titel" class="form-control" />
+        <span asp-validation-for="Titel" class="text-danger" />
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Beschreibung" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <textarea asp-for="Beschreibung" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Beschreibung" class="text-danger" />
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Wichtigkeit" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <span class="rating">
+            <input type="radio" class="rating-input" id="rating-input-1-5" asp-for="Wichtigkeit" value="5" />
+            <label for="rating-input-1-5" class="rating-star"></label>
+            <input type="radio" class="rating-input" id="rating-input-1-4" asp-for="Wichtigkeit" value="4" />
+            <label for="rating-input-1-4" class="rating-star"></label>
+            <input type="radio" class="rating-input" id="rating-input-1-3" asp-for="Wichtigkeit" value="3" />
+            <label for="rating-input-1-3" class="rating-star"></label>
+            <input type="radio" class="rating-input" id="rating-input-1-2" asp-for="Wichtigkeit" value="2" />
+            <label for="rating-input-1-2" class="rating-star"></label>
+            <input type="radio" class="rating-input" id="rating-input-1-1" asp-for="Wichtigkeit" value="1" />
+            <label for="rating-input-1-1" class="rating-star"></label>
+        </span>
+        <span asp-validation-for="Wichtigkeit" class="text-danger" />
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="ErledigtBisDatum" class="col-md-2 control-label"></label>
+    <div class="col-md-2">
+        <input asp-for="ErledigtBisDatum" class="form-control" data-provide="datepicker-inline" data-date-language="de-CH" data-date-format="yyyy-mm-dd" placeholder="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <span asp-validation-for="ErledigtBisDatum" class="text-danger" />
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="ErledigtBisZeit" class="col-md-2 control-label"></label>
+    <div class="col-md-2">
+        <input asp-for="ErledigtBisZeit" class="form-control" type="time" placeholder="@DateTime.Now.ToString("t")" />
+        <span asp-validation-for="ErledigtBisZeit" class="text-danger" />
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <div class="checkbox">
+            <label asp-for="Abgeschlossen">
+                <input asp-for="Abgeschlossen" />Erledigt
+            </label>
+        </div>
+    </div>
+</div>
