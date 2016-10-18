@@ -4,14 +4,14 @@
     <label asp-for="Titel" class="col-md-2 control-label"></label>
     <div class="col-md-10">
         <input asp-for="Titel" class="form-control" />
-        <span asp-validation-for="Titel" class="text-danger" />
+        <span asp-validation-for="Titel" class="text-danger"></span>
     </div>
 </div>
 <div class="form-group">
     <label asp-for="Beschreibung" class="col-md-2 control-label"></label>
     <div class="col-md-10">
         <textarea asp-for="Beschreibung" class="form-control" rows="3"></textarea>
-        <span asp-validation-for="Beschreibung" class="text-danger" />
+        <span asp-validation-for="Beschreibung" class="text-danger"></span>
     </div>
 </div>
 <div class="form-group">
@@ -29,21 +29,21 @@
             <input type="radio" class="rating-input" id="rating-input-1-1" asp-for="Wichtigkeit" value="1" />
             <label for="rating-input-1-1" class="rating-star"></label>
         </span>
-        <span asp-validation-for="Wichtigkeit" class="text-danger" />
+        <span asp-validation-for="Wichtigkeit" class="text-danger"></span>
     </div>
 </div>
 <div class="form-group">
     <label asp-for="ErledigtBisDatum" class="col-md-2 control-label"></label>
     <div class="col-md-2">
         <input asp-for="ErledigtBisDatum" class="form-control" data-provide="datepicker-inline" data-date-language="de-CH" data-date-format="yyyy-mm-dd" placeholder="@DateTime.Now.ToString("yyyy-MM-dd")" />
-        <span asp-validation-for="ErledigtBisDatum" class="text-danger" />
+        <span asp-validation-for="ErledigtBisDatum" class="text-danger"></span>
     </div>
 </div>
 <div class="form-group">
     <label asp-for="ErledigtBisZeit" class="col-md-2 control-label"></label>
     <div class="col-md-2">
         <input asp-for="ErledigtBisZeit" class="form-control" type="time" placeholder="@DateTime.Now.ToString("t")" />
-        <span asp-validation-for="ErledigtBisZeit" class="text-danger" />
+        <span asp-validation-for="ErledigtBisZeit" class="text-danger"></span>
     </div>
 </div>
 <div class="form-group">

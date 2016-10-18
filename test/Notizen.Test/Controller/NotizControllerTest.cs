@@ -51,8 +51,8 @@ namespace Notizen.Test.Controller
         {
             
             var controller = new NotizController(_dbContext);
-            var x = ((ContentResult)controller.Editieren(1)).Content;
-            var y = ((ContentResult)controller.Editieren(99)).Content;
+            var x = ((ContentResult)controller.Editieren(1)).StatusCode;
+            var y = ((ContentResult)controller.Editieren(99)).StatusCode;
             //  Assert.NotEqual(name, ((ContentResult)controller.Name(settingLower)).Content);
         }
 

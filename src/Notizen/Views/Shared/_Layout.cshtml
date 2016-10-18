@@ -6,12 +6,12 @@
     <title>@ViewData["Title"] - Notizen</title>
 
     <environment names="Development">
-        <link rel="stylesheet" id="BootstrapStyle" href="@ViewBag.StyleBootstrap">
+        <link rel="stylesheet" href="@ViewBag.StyleBootstrap">
         <link rel="stylesheet" href="~/css/site.css"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" id="BootstrapStyle" href="@ViewBag.StyleBootstrap">
+        <link rel="stylesheet" href="@ViewBag.StyleBootstrap">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
     </environment>

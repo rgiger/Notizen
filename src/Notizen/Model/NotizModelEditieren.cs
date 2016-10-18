@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Notizen.DbModel;
+﻿using Notizen.DbModel;
 
 namespace Notizen.Model
 {
@@ -20,7 +18,7 @@ namespace Notizen.Model
             //}
         }
         
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         //public int Id { get; set; }
         //[DataType(DataType.Date)]
