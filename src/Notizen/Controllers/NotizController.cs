@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Notizen.DbModel;
 using Notizen.DbModel.Notizen;
 using Notizen.Model;
+using Notizen.Repository;
 
 namespace Notizen.Controllers
 {
@@ -16,15 +14,16 @@ namespace Notizen.Controllers
         private const string Stylesheet = "Style";
         private const string Sortierung = "Sortierung";
         private const string FilterAbgeschlossen = "FilterAbgeschlossen";
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+
+        private NotizRepository NotizRepository;
 
         public NotizController(ApplicationDbContext context)
         {
-            _context = context;
+            NotizRepository = new NotizRepository(context);
+
         }
-
         
-
         private void SetzeStyle()
         {
             if (HttpContext.Session.GetString(Stylesheet) == null)
@@ -79,28 +78,9 @@ namespace Notizen.Controllers
             SetzeStyle();
             SetzeFilter();
             SetzeSortierung();
-            var x = _context.Notizen.ToList().Select(u => new NotizModelListe(u)).ToList();
-            x = FilterListe(x);
-            x = SortiereListe(x);
-            return View(x);
+            return View(NotizRepository.GetListe(Convert.ToBoolean(HttpContext.Session.GetString(FilterAbgeschlossen)), HttpContext.Session.GetString(Sortierung)));
         }
-
-        private List<NotizModelListe> FilterListe(List<NotizModelListe> x)
-        {
-            return HttpContext.Session.GetString(FilterAbgeschlossen) == true.ToString() ? x.Where(c => !c.Abgeschlossen).ToList() : x;
-        }
-
-        private List<NotizModelListe> SortiereListe(List<NotizModelListe> x)
-        {
-            if (HttpContext.Session.GetString(Sortierung) == SortierungsTyp.ErledigtBisDatum.ToString())
-                x = x.OrderBy(c => c.ErledigtBis).ToList();
-            else if (HttpContext.Session.GetString(Sortierung) == SortierungsTyp.Wichtigkeit.ToString())
-                x = x.OrderByDescending(c => c.Wichtigkeit).ToList();
-            else if (HttpContext.Session.GetString(Sortierung) == SortierungsTyp.Erstelldatum.ToString())
-                x = x.OrderBy(c => c.Erstelldatum).ToList();
-            return x;
-        }
-
+        
         public IActionResult Neu()
         {
             SetzeStyle();
@@ -113,27 +93,7 @@ namespace Notizen.Controllers
             SetzeStyle();
             if (ModelState.IsValid)
             {
-                var zuErledigenbis = nm.ErledigtBisDatum;
-                if (nm.ErledigtBisZeit.HasValue)
-                {
-                    zuErledigenbis = zuErledigenbis?.Add(nm.ErledigtBisZeit.Value);
-                }
-                var neueNotiz = new NotizDbModel
-                {
-                    //Abgeschlossen = nm.Abgeschlossen,
-                    Erstelldatum = DateTime.Now,
-                    Beschreibung = nm.Beschreibung,
-                    Wichtigkeit = nm.Wichtigkeit,
-                    Titel = nm.Titel,
-                    ErledigtBis = zuErledigenbis,
-                    //Id = nm.Id
-                };
-                if (nm.Abgeschlossen)
-                {
-                    nm.AbgeschlossenZeitpunkt = DateTime.Now;
-                }
-                _context.Notizen.Add(neueNotiz);
-                _context.SaveChanges();
+                NotizRepository.FuegeHinzu(nm);
                 return RedirectToAction("Liste");
             }
             return View(nm);
@@ -142,13 +102,9 @@ namespace Notizen.Controllers
         public IActionResult Editieren(int id)
         {
             SetzeStyle();
-            if (_context.Notizen.Any(c => c.Id == id))
-            {
-                var x = new NotizModelEditieren(_context.Notizen.First(c => c.Id == id));
-
-                return View(x);
-            }
-            return NotFound();
+            return NotizRepository.Existiert(id)
+                ? (IActionResult) View(NotizRepository.GetAsNotizModelEditieren(id))
+                : NotFound();
         }
 
         [HttpPost]
@@ -157,35 +113,7 @@ namespace Notizen.Controllers
             SetzeStyle();
             if (ModelState.IsValid)
             {
-                var zuErledigenbis = nm.ErledigtBisDatum;
-                if (nm.ErledigtBisZeit.HasValue)
-                {
-                    zuErledigenbis = zuErledigenbis?.Add(nm.ErledigtBisZeit.Value);
-                }
-                var x = _context.Notizen.First(c => c.Id == nm.Id);
-
-                if (!x.AbgeschlossenZeitpunkt.HasValue)
-                {
-                    if (nm.Abgeschlossen)
-                    {
-                        x.AbgeschlossenZeitpunkt = DateTime.Now;
-                    }
-                }
-                else
-                {
-                    if (!nm.Abgeschlossen)
-                    {
-                        x.AbgeschlossenZeitpunkt = null;
-                    }
-
-                }
-
-                x.Beschreibung = nm.Beschreibung;
-                x.Wichtigkeit = nm.Wichtigkeit;
-                x.Titel = nm.Titel;
-                x.ErledigtBis = zuErledigenbis;
-                
-                _context.SaveChanges();
+                NotizRepository.Aktualisiere(nm);
                 return RedirectToAction("Liste");
             }
             return View(nm);
@@ -199,9 +127,7 @@ namespace Notizen.Controllers
 
         public IActionResult Loeschen(int id)
         {
-            var x = _context.Notizen.First(c => c.Id == id);
-            _context.Notizen.Remove(x);
-            _context.SaveChanges();
+            NotizRepository.Loesche(id);
             return RedirectToAction("Liste");
         }
     }
