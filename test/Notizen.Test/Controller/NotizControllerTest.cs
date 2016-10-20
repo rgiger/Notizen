@@ -41,7 +41,7 @@ namespace Notizen.Test.Controller
                 ControllerContext = new ControllerContext() {HttpContext = MockHttpContext.Object }
             };
             
-            var resultbad = (StatusCodeResult)controller.Editieren(1);
+            var resultbad = (StatusCodeResult)controller.Editieren(1000);
             Assert.Equal((int)HttpStatusCode.NotFound, resultbad.StatusCode);
         }
 

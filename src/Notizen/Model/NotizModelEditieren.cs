@@ -18,7 +18,7 @@ namespace Notizen.Model
             //}
         }
         
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         //public int Id { get; set; }
         //[DataType(DataType.Date)]

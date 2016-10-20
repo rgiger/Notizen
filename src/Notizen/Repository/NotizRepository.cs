@@ -16,7 +16,7 @@ namespace Notizen.Repository
             _context = context;
         }
 
-        public void FuegeHinzu(NotizModelErstellen nm)
+        public int FuegeHinzu(NotizModelErstellen nm)
         {
             var zuErledigenbis = nm.ErledigtBisDatum;
             if (nm.ErledigtBisZeit.HasValue)
@@ -37,6 +37,7 @@ namespace Notizen.Repository
             }
             _context.Notizen.Add(neueNotiz);
             _context.SaveChanges();
+            return neueNotiz.Id;
         }
 
         public void Aktualisiere(NotizModelEditieren nm)

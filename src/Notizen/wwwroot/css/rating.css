@@ -28,13 +28,13 @@
     width: 16px;
 }
 
-.rating-static {
+/*.rating-static {
     background: url('/images/star.png') 0 -16px;
     display: block;
     float: left;
     height: 16px;
     position: relative;
     width: 16px;
-}
+}*/
 
 .rating-on { background-position: 0 0; }

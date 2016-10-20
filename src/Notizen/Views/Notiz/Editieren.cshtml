@@ -9,6 +9,7 @@
 
 <div class="form-horizontal">
     <form asp-action="Editieren">
+        <input type="hidden" asp-for="Id" />
         @Html.Partial("PartialNotizBearbeiten", Model)
         @*<div class="form-group">
             <label asp-for="Titel" class="col-md-2 control-label"></label>
