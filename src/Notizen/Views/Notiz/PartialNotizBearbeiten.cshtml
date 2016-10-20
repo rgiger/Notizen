@@ -35,7 +35,12 @@
 <div class="form-group">
     <label asp-for="ErledigtBisDatum" class="col-md-2 control-label"></label>
     <div class="col-md-2">
-        <input asp-for="ErledigtBisDatum" class="form-control" data-provide="datepicker-inline" data-date-language="de-CH" data-date-format="yyyy-mm-dd" placeholder="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <div class="input-group date" id="datetimepicker">
+            <input asp-for="ErledigtBisDatum" class="form-control">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
         <span asp-validation-for="ErledigtBisDatum" class="text-danger"></span>
     </div>
 </div>

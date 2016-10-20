@@ -19,7 +19,7 @@ namespace Notizen.Model
             }
         }
 
-        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime? ErledigtBisDatum { get; set; }
 
         [DataType(DataType.Time)]

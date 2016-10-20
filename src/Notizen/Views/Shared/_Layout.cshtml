@@ -6,12 +6,14 @@
     <title>@ViewData["Title"] - Notizen</title>
 
     <environment names="Development">
-        <link rel="stylesheet" href="@ViewBag.StyleBootstrap">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstraplight.css">
+        <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="~/css/site.css"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="@ViewBag.StyleBootstrap">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstraplight.min.css">
+        <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
     </environment>
@@ -28,10 +30,9 @@
 <environment names="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="~/lib/bootstrap-datepicker/js/locales/bootstrap-datepicker.de.js"></script>
     <script src="~/lib/moment/moment.js"></script>
     <script src="~/lib/moment/locale/de.js"></script>
+    <script src="~/lib/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
     <script src="~/js/site.js" asp-append-version="true" defer></script>
 </environment>
 <environment names="Staging,Production">
@@ -45,10 +46,9 @@
             asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         
     </script>
-    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="~/lib/bootstrap-datepicker/js/locales/bootstrap-datepicker.de.js"></script>
     <script src="~/lib/moment/moment.js"></script>
     <script src="~/lib/moment/locale/de.js"></script>
+    <script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/js/site.min.js" asp-append-version="true" defer></script>
 </environment>
 

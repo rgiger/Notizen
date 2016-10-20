@@ -2,6 +2,8 @@ Array.from(document.getElementsByClassName("relativedate")).forEach(function (el
   element.textContent = moment(element.textContent, "DD.MM.YYYY HH:mm").fromNow();
 });
 
+$("#datetimepicker").datetimepicker();
+
 var forms = Array.from(document.getElementsByTagName('form'));
 if (forms.length) {
   var warneVorDatenverlust = function (event) {
