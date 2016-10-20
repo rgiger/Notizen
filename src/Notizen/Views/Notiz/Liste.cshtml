@@ -17,7 +17,7 @@
             <li><a asp-action="WechsleSortierung" asp-route-id="@SortierungsTyp.Erstelldatum" class="btn btn-default @(ViewBag.Sortierung == SortierungsTyp.Erstelldatum.ToString() ? "active" : "")">Erstelldatum</a></li>
         </ul>
     </li>
-    <li><a asp-action="WechsleFilter" class="btn btn-default @(ViewBag.FilterAbgeschlossen == true.ToString() ? "active" : "")">Erledigte ausblenden</a></li>
+    <li><a asp-action="WechsleFilter" class="btn btn-default @(ViewBag.FilterAbgeschlossen == true.ToString() ? "active" : "")">Ohne Erledigte</a></li>
 
 </ul>
 @if(Model.Any()) {
