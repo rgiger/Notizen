@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Notizen.DbModel.Notizen;
 using Notizen.Model;
@@ -13,7 +9,7 @@ namespace Notizen.Test.Service
 {
     public sealed class NotizServiceTest
     {
-        private NotizRepository _notizRepository;
+        private readonly NotizRepository _notizRepository;
         public NotizServiceTest()
         {
             var services = new ServiceCollection();

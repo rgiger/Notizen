@@ -9,26 +9,26 @@ namespace Notizen.Controllers
 {
     public class NotizController : Controller
     {
-        private const string DarklayoutBootstrap = "/lib/bootstrap/dist/css/bootstrapdark.css";
-        private const string LightlayoutBootstrap = "/lib/bootstrap/dist/css/bootstraplight.css";
+        //private const string DarklayoutBootstrap = "/lib/bootstrap/dist/css/bootstrapdark.css";
+        //private const string LightlayoutBootstrap = "/lib/bootstrap/dist/css/bootstraplight.css";
         private const string Stylesheet = "Style";
         private const string Sortierung = "Sortierung";
         private const string FilterAbgeschlossen = "FilterAbgeschlossen";
         //private readonly ApplicationDbContext _context;
 
-        private NotizRepository NotizRepository;
+        private readonly NotizRepository _notizRepository;
 
         public NotizController(ApplicationDbContext context)
         {
-            NotizRepository = new NotizRepository(context);
+            _notizRepository = new NotizRepository(context);
 
         }
         
         private void SetzeStyle()
         {
             if (HttpContext.Session.GetString(Stylesheet) == null)
-                HttpContext.Session.SetString(Stylesheet, LightlayoutBootstrap);
-            ViewBag.StyleBootstrap = HttpContext.Session.GetString(Stylesheet);
+                HttpContext.Session.SetString(Stylesheet, "true");
+            ViewBag.StyleBootstrap = HttpContext.Session.GetString("false");
         }
 
         private void SetzeSortierung()
@@ -48,10 +48,9 @@ namespace Notizen.Controllers
         public IActionResult WechsleStyle()
         {
             SetzeStyle();
-            HttpContext.Session.SetString(Stylesheet,
-                HttpContext.Session.GetString(Stylesheet) == LightlayoutBootstrap
-                    ? DarklayoutBootstrap
-                    : LightlayoutBootstrap);
+            HttpContext.Session.SetString(Stylesheet, Convert.ToBoolean(HttpContext.Session.GetString(Stylesheet))
+                    ? "false"
+                    : "true");
             return RedirectToAction("Liste");
         }
 
@@ -78,7 +77,7 @@ namespace Notizen.Controllers
             SetzeStyle();
             SetzeFilter();
             SetzeSortierung();
-            return View(NotizRepository.GetListe(Convert.ToBoolean(HttpContext.Session.GetString(FilterAbgeschlossen)), HttpContext.Session.GetString(Sortierung)));
+            return View(_notizRepository.GetListe(Convert.ToBoolean(HttpContext.Session.GetString(FilterAbgeschlossen)), HttpContext.Session.GetString(Sortierung)));
         }
         
         public IActionResult Neu()
@@ -93,7 +92,7 @@ namespace Notizen.Controllers
             SetzeStyle();
             if (ModelState.IsValid)
             {
-                NotizRepository.FuegeHinzu(nm);
+                _notizRepository.FuegeHinzu(nm);
                 return RedirectToAction("Liste");
             }
             return View(nm);
@@ -102,8 +101,8 @@ namespace Notizen.Controllers
         public IActionResult Editieren(int id)
         {
             SetzeStyle();
-            return NotizRepository.Existiert(id)
-                ? (IActionResult) View(NotizRepository.GetAsNotizModelEditieren(id))
+            return _notizRepository.Existiert(id)
+                ? (IActionResult) View(_notizRepository.GetAsNotizModelEditieren(id))
                 : NotFound();
         }
 
@@ -113,7 +112,7 @@ namespace Notizen.Controllers
             SetzeStyle();
             if (ModelState.IsValid)
             {
-                NotizRepository.Aktualisiere(nm);
+                _notizRepository.Aktualisiere(nm);
                 return RedirectToAction("Liste");
             }
             return View(nm);
@@ -127,7 +126,7 @@ namespace Notizen.Controllers
 
         public IActionResult Loeschen(int id)
         {
-            NotizRepository.Loesche(id);
+            _notizRepository.Loesche(id);
             return RedirectToAction("Liste");
         }
     }
