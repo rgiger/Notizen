@@ -23,6 +23,8 @@ namespace Notizen.Controllers
             _context = context;
         }
 
+        
+
         private void SetzeStyle()
         {
             if (HttpContext.Session.GetString(Stylesheet) == null)

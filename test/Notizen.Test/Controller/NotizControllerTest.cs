@@ -1,24 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Testing.Abstractions;
 using Moq;
 using Notizen.Controllers;
 using Notizen.DbModel.Notizen;
@@ -26,34 +10,39 @@ using Xunit;
 
 namespace Notizen.Test.Controller
 {
-    public class NotizControllerTest
+    public sealed class NotizControllerTest
     {
-        private readonly IServiceProvider _serviceProvider;
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
+        
+        private Mock<HttpContext> MockHttpContext { get; }
 
         public NotizControllerTest()
         {
             var services = new ServiceCollection();
-
+            
+            services.AddEntityFrameworkInMemoryDatabase();
             services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
+            services.AddMvc();
 
-            var tempDataFactory = new Mock<ITempDataDictionaryFactory>();
-            tempDataFactory.Setup(x => x.GetTempData(It.IsAny<HttpContext>())).Returns(new Mock<ITempDataDictionary>().Object);
-            services.AddSingleton(tempDataFactory.Object);
-
-            _serviceProvider = services.BuildServiceProvider();
-            _dbContext = _serviceProvider.GetService<ApplicationDbContext>();
-
+            var serviceProvider = services.BuildServiceProvider();
+            _dbContext = serviceProvider.GetService<ApplicationDbContext>();
+            
+            MockHttpContext = new Mock<HttpContext>();
+            var mockSession = new Mock<ISession>();
+            MockHttpContext.SetupGet(c=>c.Session).Returns(mockSession.Object);
         }
 
+
         [Fact]
-        public void GetNotiz()
+        public void EditierenNotizNotFound()
         {
+            var controller = new NotizController(_dbContext)
+            {
+                ControllerContext = new ControllerContext() {HttpContext = MockHttpContext.Object }
+            };
             
-            var controller = new NotizController(_dbContext);
-            var x = ((ContentResult)controller.Editieren(1)).StatusCode;
-            var y = ((ContentResult)controller.Editieren(99)).StatusCode;
-            //  Assert.NotEqual(name, ((ContentResult)controller.Name(settingLower)).Content);
+            var resultbad = (StatusCodeResult)controller.Editieren(1);
+            Assert.Equal((int)HttpStatusCode.NotFound, resultbad.StatusCode);
         }
 
     }
