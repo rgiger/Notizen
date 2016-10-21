@@ -16,7 +16,9 @@ if (forms.length) {
   window.addEventListener("beforeunload", warneVorDatenverlust);
   forms.forEach(function (element) {
     element.addEventListener("submit", function () {
-      window.removeEventListener("beforeunload", warneVorDatenverlust);
+      if ($(element).valid()) {
+        window.removeEventListener("beforeunload", warneVorDatenverlust);
+      }
     });
   });
 }
