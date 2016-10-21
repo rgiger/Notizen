@@ -23,7 +23,7 @@
         <div class="notiz-body">
             <div class="notiz-body-links">
                 <label>
-                    <input type="checkbox" value="" disabled @(Model.AbgeschlossenZeitpunkt.HasValue ? "checked" : "")>
+                    <span class="glyphicon glyphicon-@(Model.AbgeschlossenZeitpunkt.HasValue ? "check" : "unchecked")" aria-hidden="true"></span>
                     <span>
                         Erledigt
                         @if (Model.AbgeschlossenZeitpunkt.HasValue)
