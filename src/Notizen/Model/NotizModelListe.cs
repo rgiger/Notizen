@@ -9,14 +9,11 @@ namespace Notizen.Model
         public NotizModelListe(NotizDbModel u) : base(u)
         {
             Id = u.Id;
-            ErledigtBis = u.ErledigtBis;
             Erstelldatum = u.Erstelldatum;
         }
 
         public int Id { get; set; }
-
-        [DataType(DataType.DateTime)]
-        public DateTime? ErledigtBis { get; set; }
+        
 
         [DataType(DataType.DateTime)]
         public DateTime Erstelldatum { get; set; }

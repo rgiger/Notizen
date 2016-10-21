@@ -18,18 +18,13 @@ namespace Notizen.Repository
 
         public int FuegeHinzu(NotizModelErstellen nm)
         {
-            var zuErledigenbis = nm.ErledigtBisDatum;
-            if (nm.ErledigtBisZeit.HasValue)
-            {
-                zuErledigenbis = zuErledigenbis?.Add(nm.ErledigtBisZeit.Value);
-            }
             var neueNotiz = new NotizDbModel
             {
                 Erstelldatum = DateTime.Now,
                 Beschreibung = nm.Beschreibung,
                 Wichtigkeit = nm.Wichtigkeit,
                 Titel = nm.Titel,
-                ErledigtBis = zuErledigenbis,
+                Termin = nm.Termin,
             };
             if (nm.Abgeschlossen)
             {
@@ -42,11 +37,6 @@ namespace Notizen.Repository
 
         public void Aktualisiere(NotizModelEditieren nm)
         {
-            var zuErledigenbis = nm.ErledigtBisDatum;
-            if (nm.ErledigtBisZeit.HasValue)
-            {
-                zuErledigenbis = zuErledigenbis?.Add(nm.ErledigtBisZeit.Value);
-            }
             var x = _context.Notizen.First(c => c.Id == nm.Id);
 
             if (!x.AbgeschlossenZeitpunkt.HasValue)
@@ -66,7 +56,7 @@ namespace Notizen.Repository
             x.Beschreibung = nm.Beschreibung;
             x.Wichtigkeit = nm.Wichtigkeit;
             x.Titel = nm.Titel;
-            x.ErledigtBis = zuErledigenbis;
+            x.Termin = nm.Termin;
             _context.SaveChanges();
         }
 
@@ -85,7 +75,7 @@ namespace Notizen.Repository
         private List<NotizModelListe> SortiereListe(List<NotizModelListe> x, string sortierung)
         {
             if (sortierung == SortierungsTyp.ErledigtBisDatum.ToString())
-                x = x.OrderBy(c => c.ErledigtBis).ToList();
+                x = x.OrderBy(c => c.Termin).ToList();
             else if (sortierung == SortierungsTyp.Wichtigkeit.ToString())
                 x = x.OrderByDescending(c => c.Wichtigkeit).ToList();
             else if (sortierung == SortierungsTyp.Erstelldatum.ToString())

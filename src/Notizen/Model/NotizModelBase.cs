@@ -17,12 +17,16 @@ namespace Notizen.Model
             Beschreibung = u.Beschreibung;
             Titel = u.Titel;
             Wichtigkeit = u.Wichtigkeit;
+            Termin = u.Termin;
         }
 
 
         [DataType(DataType.DateTime)]
         public DateTime? AbgeschlossenZeitpunkt { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}", ApplyFormatInEditMode = true)]
+        public DateTime? Termin { get; set; }
 
         [Required]
         public string Titel { get; set; }

@@ -87,7 +87,7 @@ namespace Notizen
                 Wichtigkeit = 1,
                 Titel = "Erste Notiz",
                 AbgeschlossenZeitpunkt = null,
-                ErledigtBis = DateTime.Now.AddDays(1).AddHours(4).AddMinutes(16)
+                Termin = DateTime.Now.AddDays(1).AddHours(4).AddMinutes(16)
             };
             var notiz2 = new NotizDbModel
             {
@@ -96,7 +96,7 @@ namespace Notizen
                 Wichtigkeit = 5,
                 Titel = "Nicht vergessen",
                 AbgeschlossenZeitpunkt = DateTime.Now.AddHours(-1),
-                ErledigtBis = DateTime.Now.AddDays(3).AddHours(7).AddMinutes(34)
+                Termin = DateTime.Now.AddDays(3).AddHours(7).AddMinutes(34)
             };
             context.Add(notiz1);
             context.Add(notiz2);

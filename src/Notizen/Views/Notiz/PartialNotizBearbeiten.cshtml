@@ -33,24 +33,24 @@
     </div>
 </div>
 <div class="form-group">
-    <label asp-for="ErledigtBisDatum" class="col-md-2 control-label"></label>
+    <label asp-for="Termin" class="col-md-2 control-label"></label>
     <div class="col-md-2">
         <div class="input-group date" id="datetimepicker">
-            <input asp-for="ErledigtBisDatum" class="form-control">
+            <input asp-for="Termin" class="form-control">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
-        <span asp-validation-for="ErledigtBisDatum" class="text-danger"></span>
+        <span asp-validation-for="Termin" class="text-danger"></span>
     </div>
 </div>
-<div class="form-group">
+@*<div class="form-group">
     <label asp-for="ErledigtBisZeit" class="col-md-2 control-label"></label>
     <div class="col-md-2">
         <input asp-for="ErledigtBisZeit" class="form-control" type="time" placeholder="@DateTime.Now.ToString("t")" />
         <span asp-validation-for="ErledigtBisZeit" class="text-danger"></span>
     </div>
-</div>
+</div>*@
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <div class="checkbox">

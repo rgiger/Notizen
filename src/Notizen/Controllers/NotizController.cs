@@ -11,7 +11,7 @@ namespace Notizen.Controllers
     {
         //private const string DarklayoutBootstrap = "/lib/bootstrap/dist/css/bootstrapdark.css";
         //private const string LightlayoutBootstrap = "/lib/bootstrap/dist/css/bootstraplight.css";
-        private const string Stylesheet = "Style";
+        private const string Style = "Style";
         private const string Sortierung = "Sortierung";
         private const string FilterAbgeschlossen = "FilterAbgeschlossen";
         //private readonly ApplicationDbContext _context;
@@ -26,9 +26,9 @@ namespace Notizen.Controllers
         
         private void SetzeStyle()
         {
-            if (HttpContext.Session.GetString(Stylesheet) == null)
-                HttpContext.Session.SetString(Stylesheet, "true");
-            ViewBag.StyleBootstrap = HttpContext.Session.GetString("false");
+            if (HttpContext.Session.GetString(Style) == null)
+                HttpContext.Session.SetString(Style, "True");
+            ViewBag.Style = HttpContext.Session.GetString(Style);
         }
 
         private void SetzeSortierung()
@@ -48,9 +48,9 @@ namespace Notizen.Controllers
         public IActionResult WechsleStyle()
         {
             SetzeStyle();
-            HttpContext.Session.SetString(Stylesheet, Convert.ToBoolean(HttpContext.Session.GetString(Stylesheet))
-                    ? "false"
-                    : "true");
+            HttpContext.Session.SetString(Style, Convert.ToBoolean(HttpContext.Session.GetString(Style))
+                    ? "False"
+                    : "True");
             return RedirectToAction("Liste");
         }
 

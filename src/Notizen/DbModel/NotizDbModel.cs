@@ -11,6 +11,6 @@ namespace Notizen.DbModel
        // public bool Abgeschlossen { get; set; }
         public DateTime? AbgeschlossenZeitpunkt { get; set; }
         public DateTime Erstelldatum { get; set; }
-        public DateTime? ErledigtBis { get; set; }
+        public DateTime? Termin { get; set; }
     }
 }
