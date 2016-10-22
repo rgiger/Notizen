@@ -1,6 +1,6 @@
 ﻿body {
     padding-bottom: 20px;
-    padding-top: 50px;
+    padding-top: 20px;
 }
 
 .btnactive { background-color: #255625 }
@@ -28,7 +28,25 @@
     margin-top: 1em;
 }
 
-/* mobile first */
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#logo {
+    font-family: 'GrandHotelRegular';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 3em;
+    color: lightseagreen;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
 .liste-menu, .liste-filter, .liste-filter-links, .notiz-head-rechts, .notiz-buttons {
     display: flex;
 }
@@ -56,6 +74,12 @@
 
 /* bigger screens */
 @media screen and (min-width: 30em) {
+    body {
+        padding-top: 50px;
+    }
+    #logo {
+        font-size: 4em;
+    }
     .liste-filter, .liste-filter-links {
         flex-direction: row;
     }

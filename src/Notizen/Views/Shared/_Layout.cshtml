@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="~/css/site.css"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
+        <link rel="stylesheet" href="https://fontlibrary.org/face/grand-hotel"/>
     </environment>
     <environment names="Staging,Production">
         @if(ViewBag.Style == "True") {
@@ -32,14 +33,18 @@
         <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
+        <link rel="stylesheet" href="https://fontlibrary.org/face/grand-hotel"/>
     </environment>
 </head>
 <body>
 <div class="container body-content">
+    <header>
+        <div id="logo">Notizen</div>
+    </header>
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; 2016 - Notizen</p>
+        <p>&copy; 2016 - Raphaël Giger &amp; Michael Leu</p>
     </footer>
 </div>
 
