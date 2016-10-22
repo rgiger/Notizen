@@ -6,13 +6,29 @@
     <title>@ViewData["Title"] - Notizen</title>
 
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstraplight.css">
+        @if(ViewBag.Style == "True") {
+            <link rel="stylesheet" href="~/lib/bootswatch-darkly-wiredep/dist/bootstrap.css">
+            <link rel="stylesheet" href="~/css/darkly-colorfix.css"/>
+        }
+        else
+        {
+            <link rel="stylesheet" href="~/lib/bootstrap-theme-bootswatch-flatly/css/bootstrap.css">
+            <link rel="stylesheet" href="~/css/flatly-colorfix.css"/>
+        }
         <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="~/css/site.css"/>
         <link rel="stylesheet" href="~/css/rating.css"/>
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstraplight.min.css">
+        @if(ViewBag.Style == "True") {
+            <link rel="stylesheet" href="~/lib/bootswatch-darkly-wiredep/dist/bootstrap.min.css">
+            <link rel="stylesheet" href="~/css/darkly-colorfix.css"/>
+        }
+        else
+        {
+            <link rel="stylesheet" href="~/lib/bootstrap-theme-bootswatch-flatly/css/bootstrap.min.css">
+            <link rel="stylesheet" href="~/css/flatly-colorfix.css"/>
+        }
         <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/rating.css"/>

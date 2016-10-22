@@ -1,0 +1,26 @@
+{
+  "name": "bootswatch-darkly-wiredep",
+  "version": "0.0.0",
+  "authors": [
+    "Jeff Ancel <jancel@gmail.com>"
+  ],
+  "description": "Darkly theme for bootswatch, compatible with wiredep",
+  "main": [
+    "dist/bootstrap.css"
+  ],
+  "keywords": [
+    "Bootstrap",
+    "Bootswatch",
+    "Darkly",
+    "Wiredep"
+  ],
+  "license": "MIT",
+  "homepage": "http://jancel.net",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
