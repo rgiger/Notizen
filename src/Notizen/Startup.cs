@@ -68,6 +68,7 @@ namespace Notizen
                 app.UseExceptionHandler("/Notiz/Error");
             }
 
+            app.UseStatusCodePagesWithReExecute("/Notiz/Error");
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvc(routes =>

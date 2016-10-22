@@ -32,6 +32,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 0.2em;
 }
 
 #logo {
@@ -45,6 +46,15 @@ header {
     -ms-user-select: none;
     user-select: none;
     cursor: default;
+}
+
+.error-box {
+    margin: 3em;
+    font-size: 200%;
+}
+
+.error-glyph {
+    margin-right: 1em;
 }
 
 .liste-menu, .liste-filter, .liste-filter-links, .notiz-head-rechts, .notiz-buttons {
