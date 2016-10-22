@@ -7,8 +7,8 @@ $("#datetimepicker").datetimepicker();
 var forms = Array.from(document.getElementsByTagName('form'));
 if (forms.length) {
   var warneVorDatenverlust = function (event) {
-    if (Array.from(document.getElementsByTagName('input')).filter(function (element) {
-      return element.type == "text" && typeof element.value != "undefined" && element.value != element.defaultValue;
+    if (Array.from(document.querySelectorAll('form input[type=text], form textarea')).filter(function (element) {
+      return typeof element.value != "undefined" && element.value != element.defaultValue;
     }).length) {
       event.preventDefault();
     }
