@@ -8,7 +8,6 @@ namespace Notizen.DbModel
         public string Titel { get; set; }
         public string Beschreibung { get; set; }
         public short Wichtigkeit { get; set; }
-       // public bool Abgeschlossen { get; set; }
         public DateTime? AbgeschlossenZeitpunkt { get; set; }
         public DateTime Erstelldatum { get; set; }
         public DateTime? Termin { get; set; }

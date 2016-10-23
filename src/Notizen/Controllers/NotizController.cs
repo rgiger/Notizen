@@ -9,8 +9,6 @@ namespace Notizen.Controllers
 {
     public class NotizController : Controller
     {
-        //private const string DarklayoutBootstrap = "/lib/bootstrap/dist/css/bootstrapdark.css";
-        //private const string LightlayoutBootstrap = "/lib/bootstrap/dist/css/bootstraplight.css";
         private const string Style = "Style";
         private const string Sortierung = "Sortierung";
         private const string FilterAbgeschlossen = "FilterAbgeschlossen";
