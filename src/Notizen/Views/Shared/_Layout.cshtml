@@ -7,13 +7,13 @@
 
     <environment names="Development">
         @if(ViewBag.Style == "True") {
-            <link rel="stylesheet" href="~/lib/bootswatch-darkly-wiredep/dist/bootstrap.css">
-            <link rel="stylesheet" href="~/css/darkly-colorfix.css"/>
+            <link rel="stylesheet" href="~/lib/bootstrap-theme-bootswatch-flatly/css/bootstrap.css">
+            <link rel="stylesheet" href="~/css/flatly-colorfix.css"/>
         }
         else
         {
-            <link rel="stylesheet" href="~/lib/bootstrap-theme-bootswatch-flatly/css/bootstrap.css">
-            <link rel="stylesheet" href="~/css/flatly-colorfix.css"/>
+            <link rel="stylesheet" href="~/lib/bootswatch-darkly-wiredep/dist/bootstrap.css">
+            <link rel="stylesheet" href="~/css/darkly-colorfix.css"/>
         }
         <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css">
         <link rel="stylesheet" href="~/css/site.css"/>
@@ -23,13 +23,13 @@
     </environment>
     <environment names="Staging,Production">
         @if(ViewBag.Style == "True") {
-            <link rel="stylesheet" href="~/lib/bootswatch-darkly-wiredep/dist/bootstrap.min.css">
-            <link rel="stylesheet" href="~/css/darkly-colorfix.css"/>
+            <link rel="stylesheet" href="~/lib/bootstrap-theme-bootswatch-flatly/css/bootstrap.min.css">
+            <link rel="stylesheet" href="~/css/flatly-colorfix.css"/>
         }
         else
         {
-            <link rel="stylesheet" href="~/lib/bootstrap-theme-bootswatch-flatly/css/bootstrap.min.css">
-            <link rel="stylesheet" href="~/css/flatly-colorfix.css"/>
+            <link rel="stylesheet" href="~/lib/bootswatch-darkly-wiredep/dist/bootstrap.min.css">
+            <link rel="stylesheet" href="~/css/darkly-colorfix.css"/>
         }
         <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
